@@ -1,0 +1,9 @@
+{
+  "region": "us-east-1",
+  "apiVersion": "2013-12-02",
+  "accessKeyId": "ABC123",
+  "secretAccessKey": "DEF456",
+  "endpoint": "https://kinesis.us-east-1.amazonaws.com",
+  "StreamName": "your-stream-name",
+  "PartitionKey": "default_key"
+}
