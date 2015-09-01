@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var AWS = require('aws-sdk'), config = require('./config.json');
+var fs = require('fs');
 
 var kinesis = new AWS.Kinesis({
   apiVersion: config.apiVersion,
@@ -11,8 +12,9 @@ var kinesis = new AWS.Kinesis({
 });
 
 var writeToKinesis = function(data) {
+  var buffer = new Buffer(JSON.stringify(data).toString("base64"));
   var params = {
-    Data: data,
+    Data: buffer,
     PartitionKey: config.PartitionKey,
     StreamName: config.StreamName
   };
@@ -26,4 +28,8 @@ var writeToKinesis = function(data) {
   });
 };
 
-writeToKinesis('hello world');
+var file = fs.readFile('./fitbit_example.json', 'utf8', function (err, data) {
+  if (err)
+    return console.log(err);
+  writeToKinesis(data);
+});

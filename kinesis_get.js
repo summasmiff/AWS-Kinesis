@@ -21,7 +21,7 @@ var getFromKinesis = function(data) {
     if (err) console.log(err, err.stack);
     kinesis.getRecords({
       ShardIterator: data.ShardIterator,
-      Limit: 5
+      Limit: 50
     },
     function(err, data) {
       if (err) console.log(err, err.stack);
@@ -31,6 +31,5 @@ var getFromKinesis = function(data) {
     });
   });
 };
-
 
 getFromKinesis();
